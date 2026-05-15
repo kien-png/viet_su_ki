@@ -1,5 +1,9 @@
-import detailImage from '../../../assets/images/detail_figure.png';
-import figureImage from '../../../assets/images/historical_figure.png';
+import hoChiMinhImage from '../../../assets/images/wikimedia/ho_chi_minh_card.jpg';
+import tranHungDaoCardImage from '../../../assets/images/wikimedia/home_feature_character_tran_hung_dao.jpg';
+import voNguyenGiapCardImage from '../../../assets/images/wikimedia/vo_nguyen_giap_card.jpg';
+
+const tranHungDaoPortraitImage = 'https://upload.wikimedia.org/wikipedia/commons/1/10/Tran_Hung_Dao_statue.jpg';
+const voNguyenGiapPortraitImage = 'https://upload.wikimedia.org/wikipedia/commons/b/b6/Vo_Nguyen_Giap_2008.jpg';
 
 export const historicalCharacters = [
   {
@@ -9,8 +13,8 @@ export const historicalCharacters = [
     era: '1228 - 1300',
     title: 'Hưng Đạo Đại Vương',
     summary: 'Danh tướng thời Trần, linh hồn của những chiến thắng chống Nguyên Mông và biểu tượng của ý chí tự chủ.',
-    portrait: detailImage,
-    cardImage: figureImage,
+    portrait: tranHungDaoPortraitImage,
+    cardImage: tranHungDaoCardImage,
     quote: 'Nếu bệ hạ muốn hàng, xin chém đầu thần trước đã.',
     timeline: [
       { year: '1228', title: 'Khởi đầu một huyền thoại', description: 'Sinh ra trong bối cảnh nhà Trần đang củng cố quyền lực.' },
@@ -29,8 +33,8 @@ export const historicalCharacters = [
     era: '1890 - 1969',
     title: 'Lãnh tụ giải phóng dân tộc',
     summary: 'Người đặt nền tảng cho cách mạng Việt Nam hiện đại và khơi mở con đường độc lập dân tộc.',
-    portrait: figureImage,
-    cardImage: figureImage,
+    portrait: hoChiMinhImage,
+    cardImage: hoChiMinhImage,
     quote: 'Không có gì quý hơn độc lập, tự do.',
     timeline: [
       { year: '1911', title: 'Ra đi tìm đường cứu nước', description: 'Bắt đầu hành trình dài để tìm lời giải cho độc lập dân tộc.' },
@@ -49,8 +53,8 @@ export const historicalCharacters = [
     era: '1911 - 2013',
     title: 'Đại tướng của nhân dân',
     summary: 'Nhà quân sự kiệt xuất, người chỉ huy những chiến dịch quyết định của thế kỷ XX Việt Nam.',
-    portrait: figureImage,
-    cardImage: figureImage,
+    portrait: voNguyenGiapPortraitImage,
+    cardImage: voNguyenGiapCardImage,
     quote: 'Sức mạnh của chiến tranh nhân dân là vô tận khi lòng dân đã quyết.',
     timeline: [
       { year: '1944', title: 'Đội Việt Nam Tuyên truyền Giải phóng quân', description: 'Khởi nguồn của một quân đội cách mạng hiện đại.' },

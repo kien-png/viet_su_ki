@@ -1,5 +1,19 @@
-import detailImage from '../../../assets/images/history_map_detail.png';
-import mapImage from '../../../assets/images/map.png';
+import bachDangFeaturedImage from '../../../assets/images/wikimedia/bach_dang_featured.jpg';
+import bachDangMapImage from '../../../assets/images/wikimedia/bach_dang_map.jpg';
+import dienBienFeaturedImage from '../../../assets/images/wikimedia/dien_bien_featured.jpg';
+import dienBienGalleryImage from '../../../assets/images/wikimedia/dien_bien_gallery_1.jpg';
+import dienBienMuseumImage from '../../../assets/images/wikimedia/dien_bien_gallery_2.jpg';
+import dienBienMemorialImage from '../../../assets/images/wikimedia/dien_bien_gallery_3.jpg';
+import dienBienMapImage from '../../../assets/images/wikimedia/dien_bien_map.jpg';
+import hueFeaturedImage from '../../../assets/images/wikimedia/hue_featured.jpg';
+import hueHeroImage from '../../../assets/images/wikimedia/hue_gallery_1.jpg';
+import hueCitadelImage from '../../../assets/images/wikimedia/hue_gallery_3.jpg';
+import hueMapImage from '../../../assets/images/wikimedia/hue_map.jpg';
+
+const bachDangBattleImage = 'https://upload.wikimedia.org/wikipedia/commons/4/44/Battle_of_Bach_Dang_river.jpg';
+const bachDangStakeFieldImage = 'https://upload.wikimedia.org/wikipedia/commons/4/49/C%E1%BB%8Dc_B%E1%BA%A1ch_%C4%90%E1%BA%B1ng.jpg';
+const bachDangTempleImage =
+  'https://upload.wikimedia.org/wikipedia/commons/b/b3/B%C3%A3i_c%E1%BB%8Dc_tr%C3%AAn_s%C3%B4ng_B%E1%BA%A1ch_%C4%90%E1%BA%B1ng.jpg';
 
 export const historicalLocations = [
   {
@@ -13,10 +27,12 @@ export const historicalLocations = [
     description:
       'Từ Kinh thành Huế đến các lăng tẩm, quần thể di tích nơi đây phản chiếu một giai đoạn định hình bản sắc quốc gia với quy hoạch cung điện, nghi lễ và nghệ thuật tinh xảo.',
     quote: 'Một huyết mạch văn hiến và quyền lực để chế định cốt cách của Việt Nam.',
-    featuredImage: detailImage,
-    mapImage,
+    featuredImage: hueFeaturedImage,
+    mapImage: hueMapImage,
     period: '1802 - 1945',
     rulers: ['Vua Gia Long', 'Vua Minh Mạng'],
+    coordinates: { longitude: 107.585, latitude: 16.4637 },
+    type: 'capital',
     stats: [
       { label: 'Di sản UNESCO', value: '1 quần thể' },
       { label: 'Điểm nổi bật', value: 'Kinh thành Huế' },
@@ -28,9 +44,9 @@ export const historicalLocations = [
       { year: '1945', title: 'Khép lại chế độ quân chủ', description: 'Huế bước vào một chương mới nhưng vẫn giữ vai trò trung tâm ký ức quốc gia.' }
     ],
     architectureGallery: [
-      { id: 'hue-g1', title: 'Kinh thành', image: detailImage },
-      { id: 'hue-g2', title: 'Điện Thái Hòa', image: mapImage },
-      { id: 'hue-g3', title: 'Hoàng hôn trên sông Hương', image: detailImage }
+      { id: 'hue-g1', title: 'Toàn cảnh Kinh thành Huế', image: hueHeroImage },
+      { id: 'hue-g2', title: 'Không gian Hoàng thành', image: hueCitadelImage },
+      { id: 'hue-g3', title: 'Dấu tích triều Nguyễn', image: hueFeaturedImage }
     ],
     figures: ['Vua Gia Long', 'Vua Minh Mạng', 'Tôn Thất Thuyết'],
     searchTags: ['kinh đô', 'nhà nguyễn', 'huế', 'di sản']
@@ -46,10 +62,12 @@ export const historicalLocations = [
     description:
       'Thung lũng Mường Thanh trở thành chiến địa nơi nghệ thuật quân sự, hậu cần và ý chí độc lập tạo nên một trong những chiến thắng có ảnh hưởng toàn cầu của thế kỷ XX.',
     quote: 'Một chiến thắng làm thay đổi bản đồ chính trị và niềm tin của các dân tộc thuộc địa.',
-    featuredImage: mapImage,
-    mapImage,
+    featuredImage: dienBienFeaturedImage,
+    mapImage: dienBienMapImage,
     period: '1954',
     rulers: ['Võ Nguyên Giáp'],
+    coordinates: { longitude: 103.023, latitude: 21.386 },
+    type: 'archaeological',
     stats: [
       { label: 'Chiến dịch', value: '56 ngày đêm' },
       { label: 'Mốc lịch sử', value: '7/5/1954' },
@@ -61,9 +79,9 @@ export const historicalLocations = [
       { year: '7/5/1954', title: 'Toàn thắng', description: 'Chiến thắng Điện Biên Phủ buộc Pháp ký Hiệp định Geneva.' }
     ],
     architectureGallery: [
-      { id: 'dbp-g1', title: 'Thung lũng Mường Thanh', image: mapImage },
-      { id: 'dbp-g2', title: 'Đồi A1', image: detailImage },
-      { id: 'dbp-g3', title: 'Bảo tàng chiến thắng', image: mapImage }
+      { id: 'dbp-g1', title: 'Thung lũng Mường Thanh', image: dienBienGalleryImage },
+      { id: 'dbp-g2', title: 'Bảo tàng chiến thắng', image: dienBienMuseumImage },
+      { id: 'dbp-g3', title: 'Không gian tưởng niệm chiến dịch', image: dienBienMemorialImage }
     ],
     figures: ['Võ Nguyên Giáp', 'Phan Đình Giót'],
     searchTags: ['dien bien phu', '1954', 'chien dich', 'khang chien chong phap']
@@ -79,10 +97,12 @@ export const historicalLocations = [
     description:
       'Từ Ngô Quyền đến Trần Hưng Đạo, dòng sông này đã chứng kiến những trận đánh mà địa hình, cọc gỗ và khả năng hợp nhất toàn dân trở thành nghệ thuật quân sự đặc sắc của Đại Việt.',
     quote: 'Dòng sông lịch sử khắc ghi những chiến công nhắc nhớ tinh thần tự chủ của dân tộc.',
-    featuredImage: mapImage,
-    mapImage,
+    featuredImage: bachDangFeaturedImage,
+    mapImage: bachDangMapImage,
     period: '938 - 1288',
     rulers: ['Ngô Quyền', 'Trần Hưng Đạo'],
+    coordinates: { longitude: 106.823, latitude: 20.941 },
+    type: 'archaeological',
     stats: [
       { label: 'Thời kỳ', value: '938 - 1288' },
       { label: 'Loại hình', value: 'Thủy chiến' },
@@ -94,9 +114,9 @@ export const historicalLocations = [
       { year: '1288', title: 'Trần Hưng Đạo đánh bại quân Nguyên', description: 'Đỉnh cao nghệ thuật chiến tranh nhân dân trên sông nước.' }
     ],
     architectureGallery: [
-      { id: 'bd-g1', title: 'Bến sông', image: mapImage },
-      { id: 'bd-g2', title: 'Bãi cọc khảo cổ', image: detailImage },
-      { id: 'bd-g3', title: 'Không gian đền thờ', image: mapImage }
+      { id: 'bd-g1', title: 'Tranh trận Bạch Đằng', image: bachDangBattleImage },
+      { id: 'bd-g2', title: 'Bãi cọc khảo cổ', image: bachDangStakeFieldImage },
+      { id: 'bd-g3', title: 'Di tích trên sông Bạch Đằng', image: bachDangTempleImage }
     ],
     figures: ['Ngô Quyền', 'Trần Hưng Đạo'],
     searchTags: ['bach dang', 'tran hung dao', 'ngo quyen', '1288']

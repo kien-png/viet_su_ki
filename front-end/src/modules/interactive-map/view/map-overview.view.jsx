@@ -1,68 +1,71 @@
-import { Link } from 'react-router-dom';
 import { ActionButton } from '../../../components/ui/action-button';
 import { InfoTag } from '../../../components/ui/info-tag';
 import { PanelCard } from '../../../components/ui/panel-card';
 import { SectionShell } from '../../../components/ui/section-shell';
+import { VietnamMapInteractiveView } from './vietnam-map-interactive.view';
 
-export function MapOverviewView({ featuredLocation, locations }) {
+export function MapOverviewView({ locations, selectedLocation, selectedLocationId, onSelectLocation }) {
   return (
     <SectionShell className="py-8 md:py-12">
-      <div className="grid gap-6 lg:grid-cols-[1.45fr_0.95fr]">
-        <PanelCard className="p-4">
-          <div className="rounded-sm border border-amber-200/10 bg-[radial-gradient(circle_at_top,_rgba(17,28,44,0.95),_rgba(5,5,6,0.98)_70%)] p-4">
-            <img
-              alt={featuredLocation.name}
-              className="h-full w-full rounded-sm object-cover"
-              src={featuredLocation.mapImage}
-            />
-          </div>
-          <div className="mt-4 flex flex-wrap gap-4 text-xs uppercase tracking-[0.24em] text-stone-400">
-            <span>◈ Kinh đô / trung tâm</span>
-            <span>◇ Di tích khảo cổ</span>
-          </div>
+      <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
+        {/* Bản đồ tương tác bên trái */}
+        <PanelCard className="relative min-h-[500px] p-6 lg:min-h-[600px]">
+          <VietnamMapInteractiveView
+            locations={locations}
+            selectedLocationId={selectedLocationId}
+            onSelectLocation={onSelectLocation}
+          />
         </PanelCard>
 
-        <PanelCard className="flex flex-col justify-between">
+        {/* Panel thông tin bên phải */}
+        <PanelCard className="flex flex-col justify-between p-6">
           <div>
-            <InfoTag tone="rose">{featuredLocation.title}</InfoTag>
-            <h1 className="mt-4 font-display text-4xl text-parchment">{featuredLocation.name}</h1>
-            <p className="mt-4 text-sm italic leading-7 text-stone-300">{featuredLocation.quote}</p>
+            <InfoTag tone="rose">{selectedLocation.title}</InfoTag>
+            <h1 className="mt-4 font-display text-3xl text-parchment lg:text-4xl">{selectedLocation.name}</h1>
+            <p className="mt-4 text-sm italic leading-7 text-stone-300">"{selectedLocation.quote}"</p>
+
             <div className="mt-6 border-t border-amber-200/10 pt-6">
-              <p className="text-sm leading-7 text-stone-300">{featuredLocation.description}</p>
+              <div className="flex items-center gap-2 text-xs text-brass">
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                  />
+                </svg>
+                <span className="uppercase tracking-wider">Sự kiện {selectedLocation.period}</span>
+              </div>
+              <p className="mt-3 text-sm leading-7 text-stone-300">{selectedLocation.description}</p>
             </div>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              <PanelCard className="p-4">
-                <p className="text-[10px] uppercase tracking-[0.28em] text-brass">Hoàng đế sáng lập</p>
-                <p className="mt-2 font-display text-2xl text-parchment">{featuredLocation.rulers[0]}</p>
-              </PanelCard>
-              <PanelCard className="p-4">
-                <p className="text-[10px] uppercase tracking-[0.28em] text-brass">Di sản nổi bật</p>
-                <p className="mt-2 font-display text-2xl text-parchment">Kinh thành Huế</p>
-              </PanelCard>
-            </div>
+
+            {/* Hình ảnh kiến trúc */}
+            {selectedLocation.featuredImage && (
+              <div className="mt-6">
+                <img
+                  alt={`Kiến trúc ${selectedLocation.name}`}
+                  className="h-48 w-full rounded-lg object-cover"
+                  src={selectedLocation.featuredImage}
+                />
+                <p className="mt-2 text-xs text-stone-400">Kiến trúc Kinh Thành {selectedLocation.name}</p>
+              </div>
+            )}
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-3">
-            <ActionButton to={`/map/${featuredLocation.slug}`} variant="ghost">
-              Tham quan 3D
-            </ActionButton>
-            <ActionButton to={`/map/${featuredLocation.slug}`} variant="rose">
+          <div className="mt-6">
+            <ActionButton to={`/map/${selectedLocation.slug}`} variant="rose" className="w-full">
+              <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                />
+              </svg>
               Chi tiết lịch sử
             </ActionButton>
           </div>
         </PanelCard>
-      </div>
-
-      <div className="mt-10 grid gap-4 md:grid-cols-3">
-        {locations.map((location) => (
-          <Link key={location.id} to={`/map/${location.slug}`}>
-            <PanelCard className="h-full transition hover:-translate-y-1 hover:border-amber-200/30">
-              <InfoTag>{location.region}</InfoTag>
-              <h2 className="mt-4 font-display text-2xl text-parchment">{location.name}</h2>
-              <p className="mt-3 text-sm leading-7 text-stone-300">{location.summary}</p>
-            </PanelCard>
-          </Link>
-        ))}
       </div>
     </SectionShell>
   );

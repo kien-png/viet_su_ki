@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Reveal } from '../../../components/motion/reveal';
 import { InfoTag } from '../../../components/ui/info-tag';
@@ -12,9 +13,30 @@ const filterItems = [
   { label: 'Sự kiện', value: 'event' }
 ];
 
+const ITEMS_PER_PAGE = 4;
+
 export function SearchView({ activeType, keyword, onKeywordChange, onTypeChange, results }) {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Tính toán phân trang
+  const totalPages = Math.ceil(results.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const currentResults = results.slice(startIndex, endIndex);
+
+  // Reset về trang 1 khi thay đổi filter hoặc keyword
+  const handleTypeChange = (type) => {
+    setCurrentPage(1);
+    onTypeChange(type);
+  };
+
+  const handleKeywordChange = (value) => {
+    setCurrentPage(1);
+    onKeywordChange(value);
+  };
+
   return (
-    <div className="bg-[radial-gradient(circle_at_top,_rgba(55,88,121,0.9),_rgba(5,8,14,0.98)_42%,_rgba(5,5,7,1)_100%)]">
+    <div className="bg-[radial-gradient(circle_at_top,_rgba(12,10,9,0.95),_rgba(5,5,6,0.98)_52%,_rgba(5,5,7,1)_100%)]">
       <SectionShell className="py-14">
         <Reveal className="text-center">
           <h1 className="font-display text-5xl text-parchment sm:text-6xl">Tìm Kiếm Thông Tin Lịch Sử</h1>
@@ -26,7 +48,7 @@ export function SearchView({ activeType, keyword, onKeywordChange, onTypeChange,
           >
             <input
               className="w-full bg-transparent font-display text-2xl text-parchment outline-none placeholder:text-stone-500"
-              onChange={(event) => onKeywordChange(event.target.value)}
+              onChange={(event) => handleKeywordChange(event.target.value)}
               placeholder="Nhập địa danh, nhân vật hoặc sự kiện..."
               value={keyword}
             />
@@ -37,14 +59,14 @@ export function SearchView({ activeType, keyword, onKeywordChange, onTypeChange,
             delay={280}
           >
             <span>gợi ý:</span>
-            <button onClick={() => onKeywordChange('Bạch Đằng')} type="button">
-              Bạch Đằng
-            </button>
-            <button onClick={() => onKeywordChange('Trần Hưng Đạo')} type="button">
+            <button onClick={() => handleKeywordChange('Trần Hưng Đạo')} type="button">
               Trần Hưng Đạo
             </button>
-            <button onClick={() => onKeywordChange('Điện Biên Phủ')} type="button">
+            <button onClick={() => handleKeywordChange('Điện Biên Phủ')} type="button">
               Điện Biên Phủ
+            </button>
+            <button onClick={() => handleKeywordChange('Huế')} type="button">
+              Huế
             </button>
           </Reveal>
         </Reveal>
@@ -57,7 +79,7 @@ export function SearchView({ activeType, keyword, onKeywordChange, onTypeChange,
                 <button
                   key={item.value}
                   className={`block text-left text-sm transition ${activeType === item.value ? 'text-parchment' : 'text-stone-400 hover:text-parchment'}`}
-                  onClick={() => onTypeChange(item.value)}
+                  onClick={() => handleTypeChange(item.value)}
                   type="button"
                 >
                   {item.label}
@@ -69,13 +91,13 @@ export function SearchView({ activeType, keyword, onKeywordChange, onTypeChange,
           <Reveal as="div" delay={120}>
             <div className="mb-5 flex items-center justify-between gap-4">
               <p className="text-sm italic text-stone-300">
-                Tìm thấy {results.length} kết quả cho “{keyword}”
+                Tìm thấy {results.length} kết quả {keyword && `cho "${keyword}"`}
               </p>
               <InfoTag>{activeType === 'all' ? 'Tổng hợp' : activeType}</InfoTag>
             </div>
 
             <div className="grid gap-5 md:grid-cols-2">
-              {results.map((result, index) => (
+              {currentResults.map((result, index) => (
                 <Reveal key={result.id} delay={index * 90} direction="up">
                   <Link to={result.route}>
                     <PanelCard className="h-full overflow-hidden p-0 transition hover:-translate-y-1 hover:border-amber-200/30">
@@ -90,6 +112,46 @@ export function SearchView({ activeType, keyword, onKeywordChange, onTypeChange,
                 </Reveal>
               ))}
             </div>
+
+            {/* Phân trang */}
+            {totalPages > 1 && (
+              <div className="mt-8 flex items-center justify-center gap-2">
+                <button
+                  className="rounded-lg border border-amber-200/20 bg-black/40 px-4 py-2 text-sm text-stone-300 transition hover:border-amber-200/40 hover:text-parchment disabled:cursor-not-allowed disabled:opacity-50"
+                  disabled={currentPage === 1}
+                  onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+                  type="button"
+                >
+                  Trước
+                </button>
+
+                <div className="flex gap-2">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <button
+                      key={page}
+                      className={`h-10 w-10 rounded-lg border text-sm transition ${
+                        currentPage === page
+                          ? 'border-brass bg-brass/20 text-brass'
+                          : 'border-amber-200/20 bg-black/40 text-stone-300 hover:border-amber-200/40 hover:text-parchment'
+                      }`}
+                      onClick={() => setCurrentPage(page)}
+                      type="button"
+                    >
+                      {page}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  className="rounded-lg border border-amber-200/20 bg-black/40 px-4 py-2 text-sm text-stone-300 transition hover:border-amber-200/40 hover:text-parchment disabled:cursor-not-allowed disabled:opacity-50"
+                  disabled={currentPage === totalPages}
+                  onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+                  type="button"
+                >
+                  Sau
+                </button>
+              </div>
+            )}
           </Reveal>
         </div>
       </SectionShell>

@@ -61,12 +61,14 @@ function getSearchIndex() {
 
 export function searchHistory(keyword, activeType = 'all') {
   const normalizedKeyword = normalizeText(keyword);
+  const allItems = getSearchIndex();
 
+  // Nếu không có keyword, trả về tất cả items theo type
   if (!normalizedKeyword) {
-    return [];
+    return activeType === 'all' ? allItems : allItems.filter((item) => item.type === activeType);
   }
 
-  return getSearchIndex().filter((item) => {
+  return allItems.filter((item) => {
     const isTypeMatch = activeType === 'all' || item.type === activeType;
     const searchableText = normalizeText(`${item.title} ${item.summary} ${item.meta}`);
 
