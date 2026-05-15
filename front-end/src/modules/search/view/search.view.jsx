@@ -62,9 +62,11 @@ export function SearchView({ activeType, keyword, onKeywordChange, onTypeChange,
             <button onClick={() => handleKeywordChange('Trần Hưng Đạo')} type="button">
               Trần Hưng Đạo
             </button>
+            <span className="text-stone-500">—</span>
             <button onClick={() => handleKeywordChange('Điện Biên Phủ')} type="button">
               Điện Biên Phủ
             </button>
+            <span className="text-stone-500">—</span>
             <button onClick={() => handleKeywordChange('Huế')} type="button">
               Huế
             </button>
