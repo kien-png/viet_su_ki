@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Locations</title>
+</head>
+<body>
+    <h1>Debug Locations API</h1>
+    <div id="result"></div>
+    
+    <script>
+        async function testAPI() {
+            try {
+                const response = await fetch('http://localhost:3000/api/locations?limit=50');
+                const data = await response.json();
+                
+                document.getElementById('result').innerHTML = `
+                    <h2>API Response:</h2>
+                    <p><strong>Success:</strong> ${data.success}</p>
+                    <p><strong>Total locations:</strong> ${data.data.length}</p>
+                    <h3>Locations:</h3>
+                    <ul>
+                        ${data.data.map(loc => `
+                            <li>
+                                <strong>${loc.name}</strong> (ID: ${loc.id}) 
+                                - Coordinates: ${loc.latitude}, ${loc.longitude}
+                            </li>
+                        `).join('')}
+                    </ul>
+                `;
+            } catch (error) {
+                document.getElementById('result').innerHTML = `
+                    <h2>Error:</h2>
+                    <p style="color: red;">${error.message}</p>
+                `;
+            }
+        }
+        
+        testAPI();
+    </script>
+</body>
+</html>

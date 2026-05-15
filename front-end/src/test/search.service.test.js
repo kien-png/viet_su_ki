@@ -1,21 +1,44 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { normalizeText, searchHistory } from '../modules/search/model/search.service';
 
 describe('search service', () => {
+  beforeEach(() => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () =>
+        Promise.resolve({
+          success: true,
+          data: [
+            {
+              id: 1,
+              slug: 'bach-dang',
+              summary: 'Song lich su',
+              title: 'Bach Dang',
+              type: 'location'
+            }
+          ]
+        })
+    });
+  });
+
   it('normalizes Vietnamese text with accents', () => {
     expect(normalizeText('Bạch Đằng')).toBe('bach dang');
   });
 
-  it('finds matching records without accents', () => {
-    const results = searchHistory('bach dang');
+  it('finds matching records from backend', async () => {
+    const results = await searchHistory('bach dang');
 
-    expect(results.length).toBeGreaterThan(0);
-    expect(results.some((item) => item.title.includes('Bạch Đằng'))).toBe(true);
+    expect(results.length).toBe(1);
+    expect(results[0]).toMatchObject({
+      route: '/map/bach-dang',
+      title: 'Bach Dang',
+      type: 'location'
+    });
   });
 
-  it('filters results by type', () => {
-    const results = searchHistory('nguyen', 'character');
+  it('passes the active type to backend', async () => {
+    await searchHistory('nguyen', 'character');
 
-    expect(results.every((item) => item.type === 'character')).toBe(true);
+    expect(String(global.fetch.mock.calls[0][0])).toContain('type=character');
   });
 });

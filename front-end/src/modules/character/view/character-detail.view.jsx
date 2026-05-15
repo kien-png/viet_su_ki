@@ -18,6 +18,10 @@ function NotFoundView() {
 }
 
 export function CharacterDetailView({ character }) {
+  if (character === undefined) {
+    return null;
+  }
+
   if (!character) {
     return <NotFoundView />;
   }

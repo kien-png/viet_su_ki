@@ -19,6 +19,10 @@ function NotFoundView() {
 }
 
 export function MapDetailView({ location }) {
+  if (location === undefined) {
+    return null;
+  }
+
   if (!location) {
     return <NotFoundView />;
   }

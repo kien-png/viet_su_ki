@@ -1,0 +1,143 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model HistoricalPeriod {
+  id          Int                   @id @default(autoincrement())
+  name        String                @unique @db.NVarChar(255)
+  slug        String                @unique @db.NVarChar(255)
+  summary     String?               @db.NVarChar(1000)
+  description String?               @db.NVarChar(Max)
+  startYear   Int?
+  endYear     Int?
+  searchText  String?               @db.NVarChar(Max)
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+  events      HistoricalEvent[]
+  characters  HistoricalCharacter[]
+
+  @@map("historical_periods")
+}
+
+model HistoricalLocation {
+  id            Int               @id @default(autoincrement())
+  name          String            @unique @db.NVarChar(255)
+  slug          String            @unique @db.NVarChar(255)
+  region        String?           @db.NVarChar(100)
+  province      String?           @db.NVarChar(100)
+  latitude      Decimal?          @db.Decimal(10,6)
+  longitude     Decimal?          @db.Decimal(10,6)
+  title         String?           @db.NVarChar(255)
+  summary       String?           @db.NVarChar(Max)
+  description   String?           @db.NVarChar(Max)
+  quote         String?           @db.NVarChar(Max)
+  featuredImage String?           @db.NVarChar(500) @map("featured_image")
+  mapImage      String?           @db.NVarChar(500) @map("map_image")
+  period        String?           @db.NVarChar(255)
+  searchTags    String?           @db.NVarChar(Max) @map("search_tags")
+  createdAt     DateTime?         @default(now()) @map("created_at") @db.DateTime2
+  updatedAt     DateTime?         @updatedAt @map("updated_at") @db.DateTime2
+  events        HistoricalEvent[]
+  images        LocationImage[]
+
+  @@map("historical_locations")
+}
+
+model HistoricalEvent {
+  id          Int                   @id @default(autoincrement())
+  title       String                @unique @db.NVarChar(255)
+  slug        String                @unique @db.NVarChar(255)
+  summary     String?               @db.NVarChar(1000)
+  description String?               @db.NVarChar(Max)
+  startYear   Int?
+  endYear     Int?
+  searchText  String?               @db.NVarChar(Max)
+  periodId    Int?
+  locationId  Int?
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+  period      HistoricalPeriod?     @relation(fields: [periodId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  location    HistoricalLocation?   @relation(fields: [locationId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  characters  CharacterEvent[]
+  images      EventImage[]
+
+  @@map("historical_events")
+}
+
+model HistoricalCharacter {
+  id          Int                 @id @default(autoincrement())
+  name        String              @unique @db.NVarChar(255)
+  slug        String              @unique @db.NVarChar(255)
+  summary     String?             @db.NVarChar(1000)
+  description String?             @db.NVarChar(Max)
+  birthYear   Int?
+  deathYear   Int?
+  searchText  String?             @db.NVarChar(Max)
+  periodId    Int?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+  period      HistoricalPeriod?   @relation(fields: [periodId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  events      CharacterEvent[]
+  timelines   CharacterTimeline[]
+  images      CharacterImage[]
+
+  @@map("historical_characters")
+}
+
+model CharacterEvent {
+  id          Int                 @id @default(autoincrement())
+  characterId Int
+  eventId     Int
+  role        String?             @db.NVarChar(255)
+  character   HistoricalCharacter @relation(fields: [characterId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  event       HistoricalEvent     @relation(fields: [eventId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([characterId, eventId])
+  @@map("character_events")
+}
+
+model CharacterTimeline {
+  id          Int                 @id @default(autoincrement())
+  characterId Int
+  year        Int?
+  title       String              @db.NVarChar(255)
+  description String?             @db.NVarChar(1000)
+  character   HistoricalCharacter @relation(fields: [characterId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("character_timelines")
+}
+
+model LocationImage {
+  id          Int                @id @default(autoincrement())
+  locationId  Int
+  imageUrl    String             @db.NVarChar(1000)
+  caption     String?            @db.NVarChar(255)
+  location    HistoricalLocation @relation(fields: [locationId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("location_images")
+}
+
+model EventImage {
+  id          Int             @id @default(autoincrement())
+  eventId     Int
+  imageUrl    String          @db.NVarChar(1000)
+  caption     String?         @db.NVarChar(255)
+  event       HistoricalEvent @relation(fields: [eventId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("event_images")
+}
+
+model CharacterImage {
+  id          Int                 @id @default(autoincrement())
+  characterId Int
+  imageUrl    String              @db.NVarChar(1000)
+  caption     String?             @db.NVarChar(255)
+  character   HistoricalCharacter @relation(fields: [characterId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("character_images")
+}
