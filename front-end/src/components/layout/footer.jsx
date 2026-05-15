@@ -5,7 +5,7 @@ const footerLinks = ['Về chúng tôi', 'Liên hệ', 'Điều khoản', 'Bảo
 export function Footer() {
   return (
     <Reveal as="footer" className="border-t border-amber-200/10 bg-[#090907]" direction="up">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:px-6 md:grid-cols-[1.3fr_0.8fr_0.9fr]">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:px-6 md:grid-cols-[1.3fr_0.8fr_1fr_0.9fr]">
         <div>
           <h2 className="font-display text-2xl text-parchment">Việt Sử Kí Số</h2>
           <p className="mt-3 max-w-sm text-sm leading-7 text-stone-400">
@@ -20,6 +20,20 @@ export function Footer() {
               <li key={item}>{item}</li>
             ))}
           </ul>
+        </div>
+
+        <div>
+          <h3 className="text-xs uppercase tracking-[0.32em] text-brass">Liên hệ</h3>
+          <div className="mt-4 space-y-2 text-sm text-stone-400">
+            <p className="leading-6">
+              <span className="text-brass">Địa chỉ:</span>
+              <br />
+              470 Trần Đại Nghĩa, P. Ngũ Hành Sơn, TP Đà Nẵng
+            </p>
+            <p>
+              <span className="text-brass">SĐT:</span> 0328638403
+            </p>
+          </div>
         </div>
 
         <div>

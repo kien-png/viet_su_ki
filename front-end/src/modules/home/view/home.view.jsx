@@ -29,7 +29,7 @@ export function HomeView({ hero, features }) {
         <SectionShell className="flex min-h-[72vh] items-center justify-center py-24 text-center">
           <div className="max-w-4xl">
             <Reveal delay={80}>
-              <p className="text-xs uppercase tracking-[0.44em] text-brass">{hero.eyebrow}</p>
+              <p className="text-sm font-bold uppercase tracking-[0.44em] text-brass">{hero.eyebrow}</p>
             </Reveal>
             <Reveal delay={220}>
               <h1 className="mt-6 font-display text-5xl uppercase text-parchment sm:text-6xl">
@@ -37,8 +37,11 @@ export function HomeView({ hero, features }) {
               </h1>
             </Reveal>
             <Reveal delay={360} direction="left">
-              <p className="mx-auto mt-8 max-w-3xl border-l border-brass pl-6 text-left font-display text-2xl italic leading-10 text-roseclay sm:text-center sm:border-l-0 sm:pl-0">
-                {hero.quote}
+              <p className="mx-auto mt-8 max-w-3xl font-display text-xl italic leading-9 text-roseclay sm:text-center">
+                Chạm để hiểu Việt Nam
+              </p>
+              <p className="mx-auto mt-4 max-w-3xl border-l border-brass pl-6 text-left text-base leading-8 text-stone-300 sm:border-l-0 sm:pl-0 sm:text-center">
+                Lịch sử không còn nằm trong sách — mà sống trong từng cú chạm.
               </p>
             </Reveal>
             <Reveal delay={500}>

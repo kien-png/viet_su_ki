@@ -24,7 +24,7 @@ export function Navbar() {
       direction="up"
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6">
-        <Link className="font-display text-xl text-parchment" to="/">
+        <Link className="font-display text-xl font-bold text-brass" to="/">
           Việt Sử Kí Số
         </Link>
 
