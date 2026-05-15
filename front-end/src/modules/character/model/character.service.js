@@ -12,11 +12,11 @@ function mapCharacter(character) {
     name: character.name,
     slug: character.slug,
     era: formatYearRange(character.birthYear, character.deathYear),
-    title: character.period?.name || 'Nhan vat lich su',
-    summary: character.summary || character.description || 'Dang cap nhat noi dung.',
+    title: character.period?.name || 'Nhân vật lịch sử',
+    summary: character.summary || character.description || 'Đang cập nhật nội dung.',
     portrait: image,
     cardImage: firstImage(character.images, assets.cardImage),
-    quote: character.summary || 'Du lieu duoc lay tu backend.',
+    quote: character.summary || 'Dữ liệu được lấy từ backend.',
     timeline: (character.timelines?.length
       ? character.timelines
       : eventTitles.map((title, index) => ({
@@ -25,11 +25,11 @@ function mapCharacter(character) {
           description: character.events[index]?.event?.summary
         }))
     ).map((item) => ({
-      year: item.year || 'Dang cap nhat',
+      year: item.year || 'Đang cập nhật',
       title: item.title,
-      description: item.description || 'Dang cap nhat noi dung.'
+      description: item.description || 'Đang cập nhật nội dung.'
     })),
-    legacy: eventTitles.length ? eventTitles : [character.period?.name || 'Di san lich su'],
+    legacy: eventTitles.length ? eventTitles : [character.period?.name || 'Di sản lịch sử'],
     works: [character.description, ...eventTitles].filter(Boolean),
     relatedLocationSlugs: character.events?.map((item) => item.event?.location?.slug).filter(Boolean) || []
   };

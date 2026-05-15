@@ -9,11 +9,11 @@ export async function getHomeHero() {
   ]);
 
   return {
-    eyebrow: 'Hanh trinh ngan nam',
-    title: 'Viet Su Ki So',
-    quote: 'Cham de hieu Viet Nam - lich su song trong tung du lieu duoc ket noi.',
-    description: `Kham pha ${locations.length} dia danh, ${periods.length} thoi ky va ${characters.length} nhan vat tu backend.`,
-    ctaLabel: 'Kham pha ngay',
+    eyebrow: 'Hành trình ngàn năm',
+    title: 'Việt Sử Ký Sơ',
+    quote: 'Chạm để hiểu Việt Nam - lịch sử sống trong từng dữ liệu được kết nối.',
+    description: `Khám phá ${locations.length} địa danh, ${periods.length} thời kỳ và ${characters.length} nhân vật.`,
+    ctaLabel: 'Khám phá ngay',
     ctaRoute: '/map',
     backdropImage: homeImages.hero
   };
@@ -29,32 +29,32 @@ export async function getHomeFeatures() {
   return [
     {
       id: 'map',
-      title: 'Ban do lich su Viet Nam',
-      description: `${locations.length} dia danh dang duoc cap nhat tu backend.`,
+      title: 'Bản đồ lịch sử Việt Nam',
+      description: `${locations.length} địa danh đang được cập nhật từ backend.`,
       route: '/map',
       image: homeImages.map,
       size: 'wide'
     },
     {
       id: 'character',
-      title: 'Nhan vat lich su',
-      description: `${characters.length} nhan vat lich su trong co so du lieu.`,
+      title: 'Nhân vật lịch sử',
+      description: `${characters.length} nhân vật lịch sử trong cơ sở dữ liệu.`,
       route: '/characters',
       image: homeImages.character,
       size: 'compact'
     },
     {
       id: 'timeline',
-      title: 'Dong thoi gian lich su',
-      description: `${periods.length} thoi ky duoc sap xep theo moc thoi gian.`,
+      title: 'Dòng thời gian lịch sử',
+      description: `${periods.length} thời kỳ được sắp xếp theo mốc thời gian.`,
       route: '/timeline',
       image: homeImages.timeline,
       size: 'compact'
     },
     {
       id: 'search',
-      title: 'Tim kiem thong tin',
-      description: 'Tra cuu dia danh, nhan vat, su kien va thoi ky tu backend.',
+      title: 'Tìm kiếm thông tin',
+      description: 'Tra cứu địa danh, nhân vật, sự kiện và thời kỳ từ backend.',
       route: '/search',
       image: homeImages.search,
       size: 'wide'

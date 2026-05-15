@@ -6,7 +6,7 @@ function mapEventToMoment(event) {
   return {
     year: formatYearRange(event.startYear, event.endYear),
     title: event.title,
-    description: event.summary || event.description || 'Dang cap nhat noi dung.'
+    description: event.summary || event.description || 'Đang cập nhật nội dung.'
   };
 }
 
@@ -22,12 +22,12 @@ function mapLocation(location) {
     id: location.id,
     name: location.name,
     slug: location.slug,
-    region: location.address || 'Viet Nam',
-    province: location.address || 'Dang cap nhat',
+    region: location.address || 'Việt Nam',
+    province: location.address || 'Đang cập nhật',
     title: location.summary || location.name,
     summary: location.summary || '',
-    description: location.description || location.summary || 'Dang cap nhat noi dung.',
-    quote: location.summary || 'Du lieu lich su duoc lay truc tiep tu backend.',
+    description: location.description || location.summary || 'Đang cập nhật nội dung.',
+    quote: location.summary || 'Dữ liệu lịch sử được lấy trực tiếp từ backend.',
     featuredImage,
     mapImage: assets.mapImage,
     period: events[0]?.period?.name || formatYearRange(events[0]?.startYear, events[0]?.endYear),
@@ -37,9 +37,9 @@ function mapLocation(location) {
     },
     type: assets.type,
     stats: [
-      { label: 'Dia diem', value: location.address || location.name },
-      { label: 'Su kien', value: String(location._count?.events ?? events.length ?? 0) },
-      { label: 'Dau moc', value: formatYearRange(events[0]?.startYear, events[0]?.endYear) }
+      { label: 'Địa điểm', value: location.address || location.name },
+      { label: 'Sự kiện', value: String(location._count?.events ?? events.length ?? 0) },
+      { label: 'Dấu mốc', value: formatYearRange(events[0]?.startYear, events[0]?.endYear) }
     ],
     timelineMoments: events.map(mapEventToMoment),
     architectureGallery: galleryImages.slice(0, 3).map((image, index) => ({

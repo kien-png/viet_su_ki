@@ -13,7 +13,7 @@ export async function apiGet(path, params = {}) {
   const payload = await response.json().catch(() => ({}));
 
   if (!response.ok || payload.success === false) {
-    throw new Error(payload.message || 'Khong the tai du lieu tu backend');
+    throw new Error(payload.message || 'Khong the tai du lieu  ');
   }
 
   return payload.data;

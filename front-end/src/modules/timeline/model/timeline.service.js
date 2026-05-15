@@ -7,11 +7,11 @@ function mapPeriod(period) {
     id: period.id,
     title: period.name,
     period: formatYearRange(period.startYear, period.endYear),
-    summary: period.summary || period.description || 'Dang cap nhat noi dung.',
+    summary: period.summary || period.description || 'Đang cập nhật nội dung.',
     bulletPoints: [
       period.description,
-      period._count?.events ? `${period._count.events} su kien lien quan` : null,
-      period._count?.characters ? `${period._count.characters} nhan vat lien quan` : null
+      period._count?.events ? `${period._count.events} sự kiện liên quan` : null,
+      period._count?.characters ? `${period._count.characters} nhân vật liên quan` : null
     ].filter(Boolean),
     image: getPeriodImage(period.slug),
     theme: getPeriodTheme(period.slug)

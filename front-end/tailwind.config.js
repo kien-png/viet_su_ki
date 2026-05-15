@@ -14,8 +14,8 @@ export default {
         glow: '0 18px 60px rgba(0, 0, 0, 0.45)'
       },
       fontFamily: {
-        display: ['Georgia', 'Times New Roman', 'serif'],
-        body: ['Helvetica', 'Arial', 'sans-serif']
+        display: ['Crimson Text', 'Georgia', 'Times New Roman', 'serif'],
+        body: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif']
       }
     }
   },
